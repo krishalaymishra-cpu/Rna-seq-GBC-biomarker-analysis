@@ -1,4 +1,4 @@
-# DEG-Analysis-pipeline
+# RNAseq-DEG-Pipeline
 RNA-seq Feature Selection and TWAS Validation (GSE138109 / SRP223526)
 
 Overview
