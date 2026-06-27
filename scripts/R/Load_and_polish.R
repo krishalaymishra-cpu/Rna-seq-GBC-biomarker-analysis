@@ -126,9 +126,30 @@ rownames(filtered_counts) <- filtered_counts[,1]
 count <- filtered_counts[, -1]
 View(count)
 
-
 ###REPLACING SRR WITH ITS GSM
 
 rownames(count)=count[,1]
 count$X=NULL
 colnames(count)[1:40]=paste0("GSM40995",32:71)
+
+
+#LOADING METADATA AND POLISHING
+col_data<-read.csv("metadata.csv")
+View(col_data)
+col_data$Assay.Type=NULL
+col_data$AvgSpotLen=NULL
+col_data<-data.frame(col_data$Run,col_data$gender,col_data$tumor_status)
+View(col_data)
+colnames(col_data)[1]="geneid"
+colnames(col_data)[2]="gender"
+colnames(col_data)[3]="condition"
+rownames(col_data)<-col_data[,1]
+col_data$geneid=NULL
+library(gtools)
+sorted_col_data <- mixedsort(rownames(col_data))
+newcol_data<-col_data[sorted_col_data,]
+head(newcol_data)
+View(newcol_data)
+col_data<-newcol_data
+View(col_data)
+rownames(col_data)[1:40]=paste0("GSM40995",32:71)
